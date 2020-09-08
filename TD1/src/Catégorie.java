@@ -8,6 +8,7 @@ public class Catégorie extends Connexion {
 		this.id_categorie=id_categorie;
 		this.titre=titre;
 		this.visuel=visuel;
+		//test git
 	}
 	
 		public  void post() throws Exception{
