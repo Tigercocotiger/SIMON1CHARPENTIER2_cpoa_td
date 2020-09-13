@@ -5,10 +5,15 @@ public class Client extends Connexion{
 	
 	public static void MenuClient(){
 		Scanner sc = new Scanner(System.in);
+		System.out.println("\r\n" + 
+				"   _____ _ _            _   \r\n" + 
+				"  / ____| (_)          | |  \r\n" + 
+				" | |    | |_  ___ _ __ | |_ \r\n" + 
+				" | |    | | |/ _ \\ '_ \\| __|\r\n" + 
+				" | |____| | |  __/ | | | |_ \r\n" + 
+				"  \\_____|_|_|\\___|_| |_|\\__|\r\n");
 		System.out.println(
-				"\n"
-			  +	"             CLIENT            "+"\n"+"\n"
-			  +	"[1]------Ajout d'un client-----[1]"+"\n"
+			  	"[1]------Ajout d'un client-----[1]"+"\n"
 			  + "[2]--Modification d'un client--[2]"+"\n"
 			  + "[3]--Suppression d'un client---[3]"+"\n"
 		      + "[4]---Affichage des clients----[4]"+"\n"
@@ -54,18 +59,30 @@ public class Client extends Connexion{
 			System.out.println("Entrer la rue du client : ");
 			String voie = sc.next();
 			System.out.println("Entrer le code postal du client : ");
-			int codepost = sc.nextInt();
+			String codepost = sc.next();
 			System.out.println("Entrer la ville du clientt : ");
-			Double ville = sc.nextDouble();
+			String ville = sc.next();
 			System.out.println("Entrer le pays du client : ");
 			String pays = sc.next();
 			
 			Connexion c1 = new Connexion();
 			Connection laConnexion = c1.creeConnexion();
-			Statement requete = laConnexion.createStatement();
-			int res = requete.executeUpdate("INSERT INTO Client (id_client, nom, prenom, identifiant, mot_de_passe, adr_numero, adr_voie, adr_code_postal, adr_ville, adr_pays) VALUES ('"+id+"', '"+nom+"', '"+prenom+"', '"+idx+"', '"+mdp+"', '"+numéroad+"', '"+voie+"', '"+codepost+"', '"+ville+"', '"+pays+"')");
+			PreparedStatement requete = laConnexion.prepareStatement("INSERT INTO Client (id_client, nom, prenom, identifiant, mot_de_passe, adr_numero, adr_voie, adr_code_postal, adr_ville, adr_pays) VALUES ('"+id+"', '"+nom+"', '"+prenom+"', '"+idx+"', '"+mdp+"', '"+numéroad+"', '"+voie+"', '"+codepost+"', '"+ville+"', '"+pays+"')");
+			requete.executeUpdate();
 		} catch (SQLException sqle) {
 			System.out.println("Pb selection " + sqle.getMessage());
+		}finally {
+			System.out.println("\r\n" + 
+					"   _____ _           _      __      _ _     _ \r\n" + 
+					"  / ____( )         | |    / _|    (_) |   | |\r\n" + 
+					" | |    |/  ___  ___| |_  | |_ __ _ _| |_  | |\r\n" + 
+					" | |       / _ \\/ __| __| |  _/ _` | | __| | |\r\n" + 
+					" | |____  |  __/\\__ \\ |_  | || (_| | | |_  |_|\r\n" + 
+					"  \\_____|  \\___||___/\\__| |_| \\__,_|_|\\__| (_)\r\n" + 
+					"                                              \r\n" + 
+					"                                              \r\n" + 
+					"");
+			Main.menu();
 		}
 }
 	
@@ -78,11 +95,24 @@ public class Client extends Connexion{
 			int id = sc.nextInt();
 			Connexion c1 = new Connexion();
 			Connection laConnexion = c1.creeConnexion();
-			Statement requete = laConnexion.createStatement();
-			int res = requete.executeUpdate("DELETE FROM Client WHERE id_client = '"+id+"'");
+			PreparedStatement requete = laConnexion.prepareStatement("DELETE FROM Client WHERE id_client = '"+id+"'");
+			requete.executeUpdate();
 		} catch (SQLException sqle) {
 			System.out.println("Pb selection " + sqle.getMessage());
+		}finally {
+			System.out.println("\r\n" + 
+					"   _____ _           _      __      _ _     _ \r\n" + 
+					"  / ____( )         | |    / _|    (_) |   | |\r\n" + 
+					" | |    |/  ___  ___| |_  | |_ __ _ _| |_  | |\r\n" + 
+					" | |       / _ \\/ __| __| |  _/ _` | | __| | |\r\n" + 
+					" | |____  |  __/\\__ \\ |_  | || (_| | | |_  |_|\r\n" + 
+					"  \\_____|  \\___||___/\\__| |_| \\__,_|_|\\__| (_)\r\n" + 
+					"                                              \r\n" + 
+					"                                              \r\n" + 
+					"");
+			Main.menu();
 		}
+	
 		}
 	
 	public static void  ModifClient(){
@@ -112,12 +142,23 @@ public class Client extends Connexion{
 			String pays = sc.next();
 			Connexion c1 = new Connexion();
 			Connection laConnexion = c1.creeConnexion();
-			Statement state= laConnexion.createStatement();
-			state.executeUpdate("UPDATE Client SET id_client='"+id+"',nom='"+nom+"',prenom='"+prenom+"',identifiant='"+idx
+			PreparedStatement state= laConnexion.prepareStatement("UPDATE Client SET id_client='"+id+"',nom='"+nom+"',prenom='"+prenom+"',identifiant='"+idx
 					+"',mot_de_pass'"+mdp+"',adr_numero='"+numéroad+"',adr_voie='"+voie+"',adr_code_postal='"+codepost+"',adr_ville='"+ville+"',adr_pays='"+pays+"' WHERE id_client='"+oldid+"'");
-			state.close();
+			state.executeUpdate();
 		}catch (SQLException sqle) {
 			System.out.println("Pb selection " + sqle.getMessage());
+			}finally {
+				System.out.println("\r\n" + 
+						"   _____ _           _      __      _ _     _ \r\n" + 
+						"  / ____( )         | |    / _|    (_) |   | |\r\n" + 
+						" | |    |/  ___  ___| |_  | |_ __ _ _| |_  | |\r\n" + 
+						" | |       / _ \\/ __| __| |  _/ _` | | __| | |\r\n" + 
+						" | |____  |  __/\\__ \\ |_  | || (_| | | |_  |_|\r\n" + 
+						"  \\_____|  \\___||___/\\__| |_| \\__,_|_|\\__| (_)\r\n" + 
+						"                                              \r\n" + 
+						"                                              \r\n" + 
+						"");
+				Main.menu();
 			} 	
 		
 	}
@@ -127,7 +168,7 @@ public class Client extends Connexion{
 	   Connexion c1 = new Connexion();
 	   Connection laConnexion = c1.creeConnexion();
 	   Statement requete = laConnexion.createStatement();
-	   ResultSet res = requete.executeQuery("select * from Produit");
+	   ResultSet res = requete.executeQuery("select * from Client");
 
 	   while (res.next()) {
 	       int no = res.getInt(1);
@@ -156,7 +197,9 @@ public class Client extends Connexion{
 	   laConnexion.close();
 	   } catch (SQLException sqle) {
 	   System.out.println("Pb dans select " + sqle.getMessage());
-	   }
+	   }finally {
+			Main.menu();
+		}
 	   }
 
 }

@@ -6,10 +6,15 @@ public class Produit extends Connexion {
 	
 public static void MenuProd(){
 	Scanner sc = new Scanner(System.in);
+	System.out.println("\r\n" + 
+			"  _____               _       _ _   \r\n" + 
+			" |  __ \\             | |     (_) |  \r\n" + 
+			" | |__) | __ ___   __| |_   _ _| |_ \r\n" + 
+			" |  ___/ '__/ _ \\ / _` | | | | | __|\r\n" + 
+			" | |   | | | (_) | (_| | |_| | | |_ \r\n" + 
+			" |_|   |_|  \\___/ \\__,_|\\__,_|_|\\__|\r\n" );
 	System.out.println(
-			"\n"
-		  +	"             PRODUIT           "+"\n"+"\n"
-		  +	"[1]----Ajout d'une Produit-----[1]"+"\n"
+		  "[1]----Ajout d'une Produit-----[1]"+"\n"
 		  + "[2]-Modification d'un produit--[2]"+"\n"
 		  + "[3]--Suppression d'un produit--[3]"+"\n"
 	      + "[4]---Affichage des produits---[4]"+"\n"
@@ -62,9 +67,21 @@ public static void AjoutProd() {
 		PreparedStatement req = laConnexion.prepareStatement("INSERT INTO Produit  VALUES ('"+id+"', '"+nom+"', '"+des+"', '"+prix+"', '"+visuel+"', '"+id_categ+"')");
 		req.executeUpdate();
 	}catch (SQLException sqle) {
-		System.out.println("Pb dans select " + sqle.getMessage());
+		System.out.println("Le problème -> " + sqle.getMessage());
 		} 		
-	
+	finally {
+		System.out.println("\r\n" + 
+				"   _____ _           _      __      _ _     _ \r\n" + 
+				"  / ____( )         | |    / _|    (_) |   | |\r\n" + 
+				" | |    |/  ___  ___| |_  | |_ __ _ _| |_  | |\r\n" + 
+				" | |       / _ \\/ __| __| |  _/ _` | | __| | |\r\n" + 
+				" | |____  |  __/\\__ \\ |_  | || (_| | | |_  |_|\r\n" + 
+				"  \\_____|  \\___||___/\\__| |_| \\__,_|_|\\__| (_)\r\n" + 
+				"                                              \r\n" + 
+				"                                              \r\n" + 
+				"");
+		Main.menu();
+	}
 	
 }
 
@@ -88,13 +105,24 @@ public static void ModifProd(){
 		
 		Connexion c1 = new Connexion();
 		Connection laConnexion = c1.creeConnexion();
-		Statement state= laConnexion.createStatement();
-		state.executeUpdate("UPDATE Produit SET id_produit='"+id+"',nom='"+nom+"',description='"+des+"',tarif='"+prix+"',description='"+visuel+"' WHERE id_categorie='"+ancienid+"'");
-		state.close();
+		PreparedStatement state= laConnexion.prepareStatement("UPDATE Produit SET id_produit='"+id+"',nom='"+nom+"',description='"+des+"',tarif='"+prix+"',description='"+visuel+"' WHERE id_categorie='"+ancienid+"'");
+		state.executeUpdate();
 	}catch (SQLException sqle) {
-		System.out.println("Pb dans select " + sqle.getMessage());
+		System.out.println("Le problème -> " + sqle.getMessage());
 		} 	
-	
+	finally {
+		System.out.println("\r\n" + 
+				"   _____ _           _      __      _ _     _ \r\n" + 
+				"  / ____( )         | |    / _|    (_) |   | |\r\n" + 
+				" | |    |/  ___  ___| |_  | |_ __ _ _| |_  | |\r\n" + 
+				" | |       / _ \\/ __| __| |  _/ _` | | __| | |\r\n" + 
+				" | |____  |  __/\\__ \\ |_  | || (_| | | |_  |_|\r\n" + 
+				"  \\_____|  \\___||___/\\__| |_| \\__,_|_|\\__| (_)\r\n" + 
+				"                                              \r\n" + 
+				"                                              \r\n" + 
+				"");
+		Main.menu();
+	}
 }
 
 
@@ -105,10 +133,22 @@ public static void SupprProd() {
 		int id = sc.nextInt();
 		Connexion c1 = new Connexion();
 		Connection laConnexion = c1.creeConnexion();
-		Statement requete = laConnexion.createStatement();
-		int res = requete.executeUpdate("DELETE FROM Produit WHERE id_produit = '"+id+"'");
+		PreparedStatement requete = laConnexion.prepareStatement("DELETE FROM Produit WHERE id_produit = '"+id+"'");
+		requete.executeUpdate();
 	} catch (SQLException sqle) {
-		System.out.println("Pb selection " + sqle.getMessage());
+		System.out.println("Le problème -> " + sqle.getMessage());
+	}finally {
+		System.out.println("\r\n" + 
+				"   _____ _           _      __      _ _     _ \r\n" + 
+				"  / ____( )         | |    / _|    (_) |   | |\r\n" + 
+				" | |    |/  ___  ___| |_  | |_ __ _ _| |_  | |\r\n" + 
+				" | |       / _ \\/ __| __| |  _/ _` | | __| | |\r\n" + 
+				" | |____  |  __/\\__ \\ |_  | || (_| | | |_  |_|\r\n" + 
+				"  \\_____|  \\___||___/\\__| |_| \\__,_|_|\\__| (_)\r\n" + 
+				"                                              \r\n" + 
+				"                                              \r\n" + 
+				"");
+		Main.menu();
 	}
 	}
 
@@ -127,7 +167,7 @@ public static void Afficher_Prod() {
        float prix = res.getFloat("tarif");
        String visuel = res.getString("visuel");
        int noc = res.getInt("id_categorie");
-       String L=no+"  "+titre+"   "+desc+"  "+prix+"  "+visuel+"  "+noc ;
+       String L="Identifiant produit: "+no+"  Titre: "+titre+"  Description: "+desc+"  Tarif: "+prix+"  Visuel: "+visuel+"  Identifiant catégorie: "+noc ;
        ligne.add(L);
        
 
@@ -142,8 +182,10 @@ public static void Afficher_Prod() {
    if (laConnexion != null)
    laConnexion.close();
    } catch (SQLException sqle) {
-   System.out.println("Pb dans select " + sqle.getMessage());
-   }
+   System.out.println("Le problème -> " + sqle.getMessage());
+   }finally {
+		Main.menu();
+	}
    }
 
 }

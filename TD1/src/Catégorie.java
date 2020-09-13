@@ -5,10 +5,15 @@ public class Catégorie extends Connexion {
 	
 public static void MenuCateg(){
 	Scanner sc = new Scanner(System.in);
+	System.out.println("\r\n" + 
+			"   _____      _    __                  _      \r\n" + 
+			"  / ____|    | |  /_/                 (_)     \r\n" + 
+			" | |     __ _| |_ ___  __ _  ___  _ __ _  ___ \r\n" + 
+			" | |    / _` | __/ _ \\/ _` |/ _ \\| '__| |/ _ \\\r\n" + 
+			" | |___| (_| | ||  __/ (_| | (_) | |  | |  __/\r\n" + 
+			"  \\_____\\__,_|\\__\\___|\\__, |\\___/|_|  |_|\\___|\r\n");
 	System.out.println(
-			"\n"
-		  +	"             CATÉGORIE            "+"\n"+"\n"
-		  +	"[1]----Ajout d'une catégorie---[1]"+"\n"
+		  	"[1]----Ajout d'une catégorie---[1]"+"\n"
 		  + "[2]Modification d'une catégorie[2]"+"\n"
 		  + "[3]Suppression d'une catégorie [3]"+"\n"
 	      + "[4]--Affichage des catégories--[4]"+"\n"
@@ -53,6 +58,18 @@ public static void AjoutCateg() {
 		req.executeUpdate();
 	}catch (SQLException sqle) {
 		System.out.println("Pb dans select " + sqle.getMessage());
+		}finally {
+			System.out.println("\r\n" + 
+					"   _____ _           _      __      _ _     _ \r\n" + 
+					"  / ____( )         | |    / _|    (_) |   | |\r\n" + 
+					" | |    |/  ___  ___| |_  | |_ __ _ _| |_  | |\r\n" + 
+					" | |       / _ \\/ __| __| |  _/ _` | | __| | |\r\n" + 
+					" | |____  |  __/\\__ \\ |_  | || (_| | | |_  |_|\r\n" + 
+					"  \\_____|  \\___||___/\\__| |_| \\__,_|_|\\__| (_)\r\n" + 
+					"                                              \r\n" + 
+					"                                              \r\n" + 
+					"");
+			Main.menu();
 		} 		
 	
 }
@@ -77,6 +94,18 @@ public static void ModifCateg(){
 		req.executeUpdate();
 	}catch (SQLException sqle) {
 		System.out.println("Pb dans select " + sqle.getMessage());
+		}finally {
+			System.out.println("\r\n" + 
+					"   _____ _           _      __      _ _     _ \r\n" + 
+					"  / ____( )         | |    / _|    (_) |   | |\r\n" + 
+					" | |    |/  ___  ___| |_  | |_ __ _ _| |_  | |\r\n" + 
+					" | |       / _ \\/ __| __| |  _/ _` | | __| | |\r\n" + 
+					" | |____  |  __/\\__ \\ |_  | || (_| | | |_  |_|\r\n" + 
+					"  \\_____|  \\___||___/\\__| |_| \\__,_|_|\\__| (_)\r\n" + 
+					"                                              \r\n" + 
+					"                                              \r\n" + 
+					"");
+			Main.menu();
 		} 	
 	
 }
@@ -93,6 +122,18 @@ public static void SupprCateg() {
 ;
 	} catch (SQLException sqle) {
 		System.out.println("Pb selection " + sqle.getMessage());
+	}finally {
+		System.out.println("\r\n" + 
+				"   _____ _           _      __      _ _     _ \r\n" + 
+				"  / ____( )         | |    / _|    (_) |   | |\r\n" + 
+				" | |    |/  ___  ___| |_  | |_ __ _ _| |_  | |\r\n" + 
+				" | |       / _ \\/ __| __| |  _/ _` | | __| | |\r\n" + 
+				" | |____  |  __/\\__ \\ |_  | || (_| | | |_  |_|\r\n" + 
+				"  \\_____|  \\___||___/\\__| |_| \\__,_|_|\\__| (_)\r\n" + 
+				"                                              \r\n" + 
+				"                                              \r\n" + 
+				"");
+		Main.menu();
 	}
 	}
 
@@ -124,7 +165,9 @@ public static void Afficher_Categ() {
    laConnexion.close();
    } catch (SQLException sqle) {
    System.out.println("Pb dans select " + sqle.getMessage());
-   }
+   }finally {
+		Main.menu();
+	}
    }
 
 }
