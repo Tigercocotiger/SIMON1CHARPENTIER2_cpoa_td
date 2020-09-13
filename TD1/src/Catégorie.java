@@ -1,46 +1,132 @@
 import java.sql.*;
+import java.util.*;
 
 public class Catégorie extends Connexion {
-	int id_categorie;
-	String titre;
-	String visuel;
-	public Catégorie(int id_categorie,String titre,String visuel) throws Exception {
-		this.id_categorie=id_categorie;
-		this.titre=titre;
-		this.visuel=visuel;
-		//test git
-	}
 	
-		public  void post() throws Exception{
-			final int var1 = id_categorie;
-			final String var2 = titre;
-			final String var3 =visuel;
-			try{
-				Connection con = creeConnexion();
-				PreparedStatement posted = con.prepareStatement("INSERT INTO Categorie  VALUES ('"+var1+"', '"+var2+"', '"+var3+"')");
-				
-				posted.executeUpdate();
-			} catch(Exception e){System.out.println(e);}
-			finally {
-				System.out.println("Insert Completed.");
-			}
-	}
+public static void MenuCateg(){
+	Scanner sc = new Scanner(System.in);
+	System.out.println(
+			"\n"
+		  +	"             CATÉGORIE            "+"\n"+"\n"
+		  +	"[1]----Ajout d'une catégorie---[1]"+"\n"
+		  + "[2]Modification d'une catégorie[2]"+"\n"
+		  + "[3]Suppression d'une catégorie [3]"+"\n"
+	      + "[4]--Affichage des catégories--[4]"+"\n"
+	      + "[5]-----------Retour-----------[5]");
+	int id = sc.nextInt();
+	switch(id) {
+	case 1:
+		AjoutCateg();
+		break;
+	case 2:
+		ModifCateg();
+		break;
+	case 3:
+		SupprCateg();
+		break;
+	case 4:
+		Affiche_Categ();
+		break;
+	case 5:
+		Main.menu();
+		break;
+	default:
+	System.out.println("Mauvaise entrée veuillez recommencer ");
+	MenuCateg();
+		}
+	}	
+public static void AjoutCateg() {
 	
+	try {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Entrer l'identifiant de la catégorie : ");
+		int id = sc.nextInt();
+		System.out.println("Entrer le nom de la catégorie : ");
+		String titre = sc.next();
+		System.out.println("Entrer l'image de la catégorie : ");
+		String visuel = sc.next();
+		sc.close();
 		
-		public void del() throws Exception{
-			
-			try{
-				Connection con = creeConnexion();
-				PreparedStatement requete =con.prepareStatement("delete from Categorie where id_categorie='"+this.id_categorie+"'");
+		Connexion c1 = new Connexion();
+		Connection laConnexion = c1.creeConnexion();
+		PreparedStatement req = laConnexion.prepareStatement("INSERT INTO Categorie  VALUES ('"+id+"', '"+titre+"', '"+visuel+"')");
+		req.executeUpdate();
+	}catch (SQLException sqle) {
+		System.out.println("Pb dans select " + sqle.getMessage());
+		} 		
+	
+	
+}
 
-				
-				requete.executeUpdate();
-			} catch(Exception e){System.out.println(e);}
-			finally {
-				System.out.println("Supprimé.");
-			}
-		}
+public static void ModifCateg(){
+	try {
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Entrer l'identifiant de la catégorie à modifier : ");
+		int ancienid = sc.nextInt();
+		System.out.println("Entrer le nouvel identifiant de la catégorie : ");
+		int id = sc.nextInt();
+		System.out.println("Entrer le nom de la catégorie : ");
+		String titre = sc.next();
+		System.out.println("Entrer l'image de la catégorie : ");
+		String visuel = sc.next();
+		sc.close();
+
+		Connexion c1 = new Connexion();
+		Connection laConnexion = c1.creeConnexion();
+		PreparedStatement req = laConnexion.prepareStatement("UPDATE Categorie SET id_categorie='"+id+"',titre='"+titre+"',visuel='"+visuel+"' WHERE id_categorie='"+ancienid+"'");
+		req.executeUpdate();
+	}catch (SQLException sqle) {
+		System.out.println("Pb dans select " + sqle.getMessage());
+		} 	
 	
-		}
-	
+}
+
+public static void SupprCateg() {
+	try {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Entrer l'identifiant de la catégorie à suprrimer : ");
+		int id = sc.nextInt();
+		Connexion c1 = new Connexion();
+		Connection laConnexion = c1.creeConnexion();
+		PreparedStatement req = laConnexion.prepareStatement("DELETE FROM Categorie WHERE id_categorie = '"+id+"'");
+		req.executeUpdate();
+;
+	} catch (SQLException sqle) {
+		System.out.println("Pb selection " + sqle.getMessage());
+	}
+	}
+
+public static void Affiche_Categ() {
+    try {
+   ArrayList<String> ligne = new ArrayList<String>();
+   Connexion c1 = new Connexion();
+   Connection laConnexion = c1.creeConnexion();
+   Statement requete = laConnexion.createStatement();
+   ResultSet res = requete.executeQuery("select * from Categorie");
+
+   while (res.next()) {
+       int no = res.getInt(1);
+       String titre = res.getString("titre");
+       String visuel = res.getString("visuel");
+       String L=no+" "+titre+"     "+visuel ;
+       ligne.add(L);
+       
+
+   }
+   for (int i = 0; i < ligne.size(); i++) {
+	      System.out.println(ligne.get(i));
+	    }
+   if (res != null)
+   res.close();
+   if (requete != null)
+   requete.close();
+   if (laConnexion != null)
+   laConnexion.close();
+   } catch (SQLException sqle) {
+   System.out.println("Pb dans select " + sqle.getMessage());
+   }
+   }
+
+}
 

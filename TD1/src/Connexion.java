@@ -19,7 +19,7 @@ public class Connexion {
 			
 		
 
-		public void uneRequete() {
+		public Statement uneRequete() {
 			try {
 				Connection laConnexion = creeConnexion();
 				Statement requete = laConnexion.createStatement();
@@ -39,7 +39,8 @@ public class Connexion {
 				
 			} catch (SQLException sqle) {
 					System.out.println("Pb dans select " + sqle.getMessage());
-					} 		 
+					}
+			return null; 		 
 			 
 		}
 		

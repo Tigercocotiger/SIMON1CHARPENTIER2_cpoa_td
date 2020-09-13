@@ -1,12 +1,23 @@
+import java.util.*;
 
 public class Main {
+	static int idcateg = 0;
+	static ArrayList<?> categ ;
 
-	public static void main(String[] args) throws Exception {
+
+
+public static void main(String[]args) throws Exception {
 		Connexion test = new Connexion();
-		test.uneRequete();
-		Catégorie yolo = new Catégorie(5, "cc", "test.png");
-		//yolo.post();
-		yolo.del();
-	}
+		Catégorie.MenuCateg();	}
 
+
+public static void menu() {
+	
 }
+}
+	
+	
+
+	
+		
+	   
