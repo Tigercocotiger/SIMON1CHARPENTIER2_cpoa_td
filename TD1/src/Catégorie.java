@@ -25,7 +25,7 @@ public static void MenuCateg(){
 		SupprCateg();
 		break;
 	case 4:
-		Affiche_Categ();
+		Afficher_Categ();
 		break;
 	case 5:
 		Main.menu();
@@ -97,7 +97,7 @@ public static void SupprCateg() {
 	}
 	}
 
-public static void Affiche_Categ() {
+public static void Afficher_Categ() {
     try {
    ArrayList<String> ligne = new ArrayList<String>();
    Connexion c1 = new Connexion();

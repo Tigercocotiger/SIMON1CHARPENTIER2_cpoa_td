@@ -8,7 +8,7 @@ public class Main {
 
 public static void main(String[]args) throws Exception {
 		Connexion test = new Connexion();
-		Catégorie.MenuCateg();	}
+		Produit.MenuProd();	}
 
 
 public static void menu() {
