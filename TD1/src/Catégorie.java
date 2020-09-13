@@ -55,7 +55,6 @@ public static void AjoutCateg() {
 		System.out.println("Pb dans select " + sqle.getMessage());
 		} 		
 	
-	
 }
 
 public static void ModifCateg(){
