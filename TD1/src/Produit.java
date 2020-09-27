@@ -63,8 +63,8 @@ public static void AjoutProd() {
 		
 		sc.close();
 		Connexion c1 = new Connexion();
-		Connection laConnexion = c1.creeConnexion();
-		PreparedStatement req = laConnexion.prepareStatement("INSERT INTO Produit  VALUES ('"+id+"', '"+nom+"', '"+des+"', '"+prix+"', '"+visuel+"', '"+id_categ+"')");
+		Connection con = c1.creeConnexion();
+		PreparedStatement req = con.prepareStatement("INSERT INTO Produit  VALUES ('"+id+"', '"+nom+"', '"+des+"', '"+prix+"', '"+visuel+"', '"+id_categ+"')");
 		req.executeUpdate();
 	}catch (SQLException sqle) {
 		System.out.println("Le problème -> " + sqle.getMessage());
@@ -104,8 +104,8 @@ public static void ModifProd(){
 		sc.close();
 		
 		Connexion c1 = new Connexion();
-		Connection laConnexion = c1.creeConnexion();
-		PreparedStatement state= laConnexion.prepareStatement("UPDATE Produit SET id_produit='"+id+"',nom='"+nom+"',description='"+des+"',tarif='"+prix+"',description='"+visuel+"' WHERE id_categorie='"+ancienid+"'");
+		Connection con = c1.creeConnexion();
+		PreparedStatement state= con.prepareStatement("UPDATE Produit SET id_produit='"+id+"',nom='"+nom+"',description='"+des+"',tarif='"+prix+"',description='"+visuel+"' WHERE id_categorie='"+ancienid+"'");
 		state.executeUpdate();
 	}catch (SQLException sqle) {
 		System.out.println("Le problème -> " + sqle.getMessage());
@@ -132,8 +132,8 @@ public static void SupprProd() {
 		System.out.println("Entrer l'identifiant de la catégorie à suprrimer : ");
 		int id = sc.nextInt();
 		Connexion c1 = new Connexion();
-		Connection laConnexion = c1.creeConnexion();
-		PreparedStatement requete = laConnexion.prepareStatement("DELETE FROM Produit WHERE id_produit = '"+id+"'");
+		Connection con = c1.creeConnexion();
+		PreparedStatement requete = con.prepareStatement("DELETE FROM Produit WHERE id_produit = '"+id+"'");
 		requete.executeUpdate();
 	} catch (SQLException sqle) {
 		System.out.println("Le problème -> " + sqle.getMessage());
@@ -156,8 +156,8 @@ public static void Afficher_Prod() {
     try {
    ArrayList<String> ligne = new ArrayList<String>();
    Connexion c1 = new Connexion();
-   Connection laConnexion = c1.creeConnexion();
-   Statement requete = laConnexion.createStatement();
+   Connection con = c1.creeConnexion();
+   Statement requete = con.createStatement();
    ResultSet res = requete.executeQuery("select * from Produit");
 
    while (res.next()) {
@@ -179,8 +179,8 @@ public static void Afficher_Prod() {
    res.close();
    if (requete != null)
    requete.close();
-   if (laConnexion != null)
-   laConnexion.close();
+   if (con != null)
+   con.close();
    } catch (SQLException sqle) {
    System.out.println("Le problème -> " + sqle.getMessage());
    }finally {

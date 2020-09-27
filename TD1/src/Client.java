@@ -66,8 +66,8 @@ public class Client extends Connexion{
 			String pays = sc.next();
 			
 			Connexion c1 = new Connexion();
-			Connection laConnexion = c1.creeConnexion();
-			PreparedStatement requete = laConnexion.prepareStatement("INSERT INTO Client (id_client, nom, prenom, identifiant, mot_de_passe, adr_numero, adr_voie, adr_code_postal, adr_ville, adr_pays) VALUES ('"+id+"', '"+nom+"', '"+prenom+"', '"+idx+"', '"+mdp+"', '"+numéroad+"', '"+voie+"', '"+codepost+"', '"+ville+"', '"+pays+"')");
+			Connection con = c1.creeConnexion();
+			PreparedStatement requete = con.prepareStatement("INSERT INTO Client (id_client, nom, prenom, identifiant, mot_de_passe, adr_numero, adr_voie, adr_code_postal, adr_ville, adr_pays) VALUES ('"+id+"', '"+nom+"', '"+prenom+"', '"+idx+"', '"+mdp+"', '"+numéroad+"', '"+voie+"', '"+codepost+"', '"+ville+"', '"+pays+"')");
 			requete.executeUpdate();
 		} catch (SQLException sqle) {
 			System.out.println("Pb selection " + sqle.getMessage());
@@ -94,8 +94,8 @@ public class Client extends Connexion{
 			System.out.println("Entrer l'identifiant du client à supprimer : ");
 			int id = sc.nextInt();
 			Connexion c1 = new Connexion();
-			Connection laConnexion = c1.creeConnexion();
-			PreparedStatement requete = laConnexion.prepareStatement("DELETE FROM Client WHERE id_client = '"+id+"'");
+			Connection con = c1.creeConnexion();
+			PreparedStatement requete = con.prepareStatement("DELETE FROM Client WHERE id_client = '"+id+"'");
 			requete.executeUpdate();
 		} catch (SQLException sqle) {
 			System.out.println("Pb selection " + sqle.getMessage());
@@ -141,8 +141,8 @@ public class Client extends Connexion{
 			System.out.println("Entrer le  nouveau pays du client : ");
 			String pays = sc.next();
 			Connexion c1 = new Connexion();
-			Connection laConnexion = c1.creeConnexion();
-			PreparedStatement state= laConnexion.prepareStatement("UPDATE Client SET id_client='"+id+"',nom='"+nom+"',prenom='"+prenom+"',identifiant='"+idx
+			Connection con = c1.creeConnexion();
+			PreparedStatement state= con.prepareStatement("UPDATE Client SET id_client='"+id+"',nom='"+nom+"',prenom='"+prenom+"',identifiant='"+idx
 					+"',mot_de_pass'"+mdp+"',adr_numero='"+numéroad+"',adr_voie='"+voie+"',adr_code_postal='"+codepost+"',adr_ville='"+ville+"',adr_pays='"+pays+"' WHERE id_client='"+oldid+"'");
 			state.executeUpdate();
 		}catch (SQLException sqle) {
@@ -166,8 +166,8 @@ public class Client extends Connexion{
 	    try {
 	   ArrayList<String> ligne = new ArrayList<String>();
 	   Connexion c1 = new Connexion();
-	   Connection laConnexion = c1.creeConnexion();
-	   Statement requete = laConnexion.createStatement();
+	   Connection con = c1.creeConnexion();
+	   Statement requete = con.createStatement();
 	   ResultSet res = requete.executeQuery("select * from Client");
 
 	   while (res.next()) {
@@ -193,8 +193,8 @@ public class Client extends Connexion{
 	   res.close();
 	   if (requete != null)
 	   requete.close();
-	   if (laConnexion != null)
-	   laConnexion.close();
+	   if (con != null)
+	   con.close();
 	   } catch (SQLException sqle) {
 	   System.out.println("Pb dans select " + sqle.getMessage());
 	   }finally {

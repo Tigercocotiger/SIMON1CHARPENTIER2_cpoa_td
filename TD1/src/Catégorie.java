@@ -53,8 +53,8 @@ public static void AjoutCateg() {
 		sc.close();
 		
 		Connexion c1 = new Connexion();
-		Connection laConnexion = c1.creeConnexion();
-		PreparedStatement req = laConnexion.prepareStatement("INSERT INTO Categorie  VALUES ('"+id+"', '"+titre+"', '"+visuel+"')");
+		Connection con = c1.creeConnexion();
+		PreparedStatement req = con.prepareStatement("INSERT INTO Categorie  VALUES ('"+id+"', '"+titre+"', '"+visuel+"')");
 		req.executeUpdate();
 	}catch (SQLException sqle) {
 		System.out.println("Pb dans select " + sqle.getMessage());
@@ -89,8 +89,8 @@ public static void ModifCateg(){
 		sc.close();
 
 		Connexion c1 = new Connexion();
-		Connection laConnexion = c1.creeConnexion();
-		PreparedStatement req = laConnexion.prepareStatement("UPDATE Categorie SET id_categorie='"+id+"',titre='"+titre+"',visuel='"+visuel+"' WHERE id_categorie='"+ancienid+"'");
+		Connection con = c1.creeConnexion();
+		PreparedStatement req = con.prepareStatement("UPDATE Categorie SET id_categorie='"+id+"',titre='"+titre+"',visuel='"+visuel+"' WHERE id_categorie='"+ancienid+"'");
 		req.executeUpdate();
 	}catch (SQLException sqle) {
 		System.out.println("Pb dans select " + sqle.getMessage());
@@ -116,8 +116,8 @@ public static void SupprCateg() {
 		System.out.println("Entrer l'identifiant de la catégorie à suprrimer : ");
 		int id = sc.nextInt();
 		Connexion c1 = new Connexion();
-		Connection laConnexion = c1.creeConnexion();
-		PreparedStatement req = laConnexion.prepareStatement("DELETE FROM Categorie WHERE id_categorie = '"+id+"'");
+		Connection con = c1.creeConnexion();
+		PreparedStatement req = con.prepareStatement("DELETE FROM Categorie WHERE id_categorie = '"+id+"'");
 		req.executeUpdate();
 ;
 	} catch (SQLException sqle) {
@@ -141,8 +141,8 @@ public static void Afficher_Categ() {
     try {
    ArrayList<String> ligne = new ArrayList<String>();
    Connexion c1 = new Connexion();
-   Connection laConnexion = c1.creeConnexion();
-   Statement requete = laConnexion.createStatement();
+   Connection con = c1.creeConnexion();
+   Statement requete = con.createStatement();
    ResultSet res = requete.executeQuery("select * from Categorie");
 
    while (res.next()) {
@@ -161,8 +161,8 @@ public static void Afficher_Categ() {
    res.close();
    if (requete != null)
    requete.close();
-   if (laConnexion != null)
-   laConnexion.close();
+   if (con != null)
+   con.close();
    } catch (SQLException sqle) {
    System.out.println("Pb dans select " + sqle.getMessage());
    }finally {

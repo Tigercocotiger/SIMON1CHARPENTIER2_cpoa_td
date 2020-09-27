@@ -21,8 +21,8 @@ public class Connexion {
 
 		public Statement uneRequete() {
 			try {
-				Connection laConnexion = creeConnexion();
-				Statement requete = laConnexion.createStatement();
+				Connection con = creeConnexion();
+				Statement requete = con.createStatement();
 				ResultSet res = requete.executeQuery("select id_client, id_client from Client");
 				while (res.next()) {
 					String nom = res.getString("id_client");
@@ -34,8 +34,8 @@ public class Connexion {
 					res.close();
 				if (requete != null)
 					requete.close();
-				if (laConnexion != null)
-					laConnexion.close();
+				if (con != null)
+					con.close();
 				
 			} catch (SQLException sqle) {
 					System.out.println("Pb dans select " + sqle.getMessage());
