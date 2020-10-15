@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox fx:id="Vbox" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane fx:id="Grid" alignment="CENTER" pickOnBounds="false" prefHeight="230.0" prefWidth="600.0" style="-fx-border-color: white;">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="224.0" minWidth="10.0" prefWidth="109.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" prefWidth="349.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="180.0" minHeight="0.0" prefHeight="56.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="189.0" minHeight="9.0" prefHeight="66.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="189.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <VBox.margin>
+            <Insets bottom="20.0" left="70.0" right="70.0" top="50.0" />
+         </VBox.margin>
+         <children>
+            <Label fx:id="LblNom" style="-fx-text-alignment: CENTER;" text="Nom:  " GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="LblDesc" text="Description:  " GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <Label fx:id="LblTarif" text="Tarif:  " GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+            <Label fx:id="LblCateg" text="Catégorie:  " GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+            <TextField fx:id="TfNom" maxWidth="-Infinity" prefHeight="25.0" prefWidth="303.0" GridPane.columnIndex="1" />
+            <TextArea fx:id="TfDesc" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="37.0" prefWidth="303.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="TfTarif" alignment="BASELINE_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="10.0" minWidth="10.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="21.0" prefWidth="49.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
+            <Label fx:id="LblEuro" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="TEXT_ONLY" focusTraversable="false" mouseTransparent="true" pickOnBounds="false" prefHeight="17.0" prefWidth="149.0" scaleShape="false" text="            euro à l'unité" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <ComboBox fx:id="ComboB" editable="true" prefWidth="150.0" promptText="OUI" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         </children>
+      </GridPane>
+      <FlowPane fx:id="Flow" alignment="CENTER" columnHalignment="CENTER" orientation="VERTICAL" prefHeight="92.0" prefWidth="520.0">
+         <VBox.margin>
+            <Insets bottom="40.0" left="40.0" right="40.0" top="10.0" />
+         </VBox.margin>
+         <children>
+            <Button fx:id="BtnValider" alignment="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="LblInfo.setText(&quot;Hello, World.&quot;)" onMouseClicked="LblInfo.setText(&quot;Hello, World.&quot;)" prefHeight="25.0" prefWidth="79.0" text="Valider" textAlignment="CENTER" />
+            <Label fx:id="LblInfo" text="-----------" />
+         </children>
+      </FlowPane>
+   </children>
+</VBox>
