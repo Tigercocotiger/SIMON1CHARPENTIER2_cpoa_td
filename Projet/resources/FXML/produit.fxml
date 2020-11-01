@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchprodback" prefHeight="725.0" prefWidth="1000.0" stylesheets="@../CSS/application.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControlersJFX.Controller_produit">
+   <children>
+      <TableView fx:id="table" layoutX="455.0" layoutY="169.0" onMouseClicked="#test" prefHeight="391.0" prefWidth="532.0">
+        <columns>
+          <TableColumn fx:id="col_idproduit" onEditCommit="#modifid" prefWidth="75.0" text="Id_produit" />
+          <TableColumn fx:id="col_nom" onEditCommit="#modifnom" prefWidth="75.0" text="Nom" />
+          <TableColumn fx:id="col_desc" onEditCommit="#modifdes" prefWidth="130.0" text="Description" />
+          <TableColumn fx:id="col_tarif" minWidth="0.0" onEditCommit="#modiftarif" prefWidth="69.0" text="Tarif" />
+          <TableColumn fx:id="col_visuel" onEditCommit="#modifvisuel" prefWidth="91.0" text="Visuel" />
+          <TableColumn fx:id="col_idcateg" prefWidth="91.0" text="Id_categorie" />
+        </columns>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </TableView>
+      <Button fx:id="btn_supr" layoutX="665.0" layoutY="600.0" mnemonicParsing="false" onAction="#suppr" prefHeight="31.0" prefWidth="112.0" text="Supprimer" />
+      <AnchorPane fx:id="anchprod" prefHeight="728.0" prefWidth="440.0">
+         <children>
+            <Label layoutX="15.0" layoutY="177.0" text="Nom :">
+               <font>
+                  <Font name="Arial Black" size="16.0" />
+               </font></Label>
+            <Label layoutX="17.0" layoutY="263.0" text="Description :">
+               <font>
+                  <Font name="Arial Black" size="16.0" />
+               </font></Label>
+            <Label layoutX="15.0" layoutY="347.0" text="Tarif :">
+               <font>
+                  <Font name="Arial Black" size="16.0" />
+               </font></Label>
+            <Label layoutX="17.0" layoutY="436.0" text="Visuel :">
+               <font>
+                  <Font name="Arial Black" size="16.0" />
+               </font></Label>
+            <Label layoutX="14.0" layoutY="528.0" text="Catégorie :">
+               <font>
+                  <Font name="Arial Black" size="16.0" />
+               </font></Label>
+            <TextArea fx:id="Tfdesc" layoutX="140.0" layoutY="219.0" onKeyPressed="#test" prefHeight="112.0" prefWidth="263.0" />
+            <TextField fx:id="Tfnom" layoutX="140.0" layoutY="177.0" onKeyPressed="#test" prefHeight="25.0" prefWidth="263.0" />
+            <TextField fx:id="Tftarif" layoutX="140.0" layoutY="347.0" onKeyReleased="#test" prefHeight="25.0" prefWidth="72.0" />
+            <TextField fx:id="Tfvisuel" layoutX="140.0" layoutY="436.0" onKeyPressed="#test" prefHeight="25.0" prefWidth="263.0" />
+            <ChoiceBox fx:id="ChoiceB" layoutX="144.0" layoutY="528.0" onAction="#test" prefHeight="25.0" prefWidth="137.0" />
+            <Button fx:id="btn_add" layoutX="146.0" layoutY="586.0" mnemonicParsing="false" onAction="#add" prefHeight="44.0" prefWidth="89.0" text="Ajouter" />
+            <ImageView fitHeight="170.0" fitWidth="303.0" layoutX="73.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/produit.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="home" accessibleRole="BUTTON" layoutX="834.0" layoutY="559.0" prefHeight="100.0" prefWidth="112.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></AnchorPane>
+      <Button fx:id="btnhome" ellipsisString="" layoutX="861.0" layoutY="25.0" mnemonicParsing="false" onAction="#swapaccueil" prefHeight="125.0" prefWidth="126.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+   </children>
+</AnchorPane>

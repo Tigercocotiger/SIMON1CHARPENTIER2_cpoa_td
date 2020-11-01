@@ -1,0 +1,63 @@
+
+    #Vbox{
+       -fx-background-image: url("oui.png");
+       -fx-background-repeat: stretch;   
+       -fx-background-size: 900 506;
+       -fx-background-position: center center;
+       -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0); 
+       -fx-font-family: "Courier New";
+       -fx-base: rgb(132, 145, 47);
+}
+
+	#acceuil{
+		-fx-background-color: #1d1d1d;
+		-fx-background-image: url("/images/snow.gif");
+		-fx-background-repeat:stretch;
+		-fx-background-size:  110%  100%;
+		-fx-background-position: bottom ;
+	}
+	
+	#anchprod{
+		-fx-base: rgb(0, 145, 200);
+		-fx-background-color: rgb(100,100,100);
+	}
+	
+	#anchprodback{
+		-fx-base: rgb(182, 240, 231);
+		-fx-background-color: rgb(200,200,200);
+	}
+	#categback{
+		-fx-base: rgb(234, 255, 117);
+		-fx-background-color: rgb(200,200,200);
+	}
+	#categform{
+		-fx-base: rgb(197, 230, 11);
+		-fx-background-color: rgb(100,100,100);
+	}
+	#clientform{
+		-fx-base: rgb(201, 8, 11);
+		-fx-background-color: rgb(100,100,100);
+	}
+	#clientback{
+		-fx-base: rgb(237, 109, 111);
+		-fx-background-color: rgb(200,200,200);
+	}
+	#btnhome{
+		-fx-background-radius: 7em;
+		-fx-background-image: url('/images/home.png');
+    	-fx-background-repeat: no-repeat;
+    	-fx-border-color: transparent;
+    	-fx-border-width: 0;
+    	-fx-background-radius: 0;
+    	-fx-background-color: transparent;
+
+}
+	
+	#invis{
+		-fx-border-color: transparent;
+    	-fx-border-width: 0;
+    	-fx-background-radius: 0;
+    	-fx-background-color: transparent;
+
+	}
+	
