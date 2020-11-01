@@ -44,7 +44,17 @@ public class Controller_accueil implements Initializable {
 		window.setTitle("Client");
 		window.centerOnScreen();
 		window.show();
-		
+	
+	}
+	
+	public void swapcommande(ActionEvent event) throws Exception{
+		System.out.println("yo");
+		Parent tablViewParent = FXMLLoader.load(getClass().getResource("/FXML/commande.fxml"));
+		Scene tablViewsScene = new Scene(tablViewParent);
+		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+		window.setScene(tablViewsScene);
+		window.setTitle("Commande");
+		window.show();
 	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

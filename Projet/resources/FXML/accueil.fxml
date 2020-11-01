@@ -62,5 +62,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <Button fx:id="invis" layoutX="70.0" layoutY="314.0" mnemonicParsing="false" onAction="#swapcommande" prefHeight="150.0" prefWidth="150.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

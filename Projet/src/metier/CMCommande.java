@@ -11,7 +11,7 @@ public class CMCommande {
 	private Date date_commande;
 	
 
-	public CMCommande(String date_commande,int id_client) {
+	public CMCommande(Date date_commande,int id_client) {
 		this(-1,date_commande,id_client);
 		
 		}
@@ -21,11 +21,6 @@ public class CMCommande {
 		this.setId_client(id_client);
 		}
 		
-	public CMCommande(int id_commande,String date_commande,int id_client) {
-		this.setId(id_commande);
-		this.setDate_commande2(date_commande);
-		this.setId_client(id_client);
-		}
 	/*public CMCommande(int id_commande,LocalDate date_commande,int id_client) {
 		this.setId(id_commande);
 		this.setDate_commande3(date_commande);
