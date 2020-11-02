@@ -17,8 +17,7 @@ public class ListeMemoireCommandeDAO implements CommandeDAO {
 	}
 	private ListeMemoireCommandeDAO() {
 		this.donnees = new ArrayList<CMCommande>();
-		this.donnees.add(new CMCommande(1, "2000-1-1",2));
-		this.donnees.add(new CMCommande(2, "2000-5-1", 3));
+
 	}
 	@Override
 	public boolean create(CMCommande objet) throws Exception {
@@ -53,14 +52,16 @@ public class ListeMemoireCommandeDAO implements CommandeDAO {
 	}
 	@Override
 	public CMCommande getById(int id) throws Exception {
-		
-				int idx = this.donnees.indexOf(new CMCommande(id,"2000-1-1",2));
+		/*
+				int idx = this.donnees.indexOf();
 				if (idx == -1) {
 					throw new IllegalArgumentException("Aucune commande ne possède cet identifiant");
 				} else {
 					return this.donnees.get(idx);
-				}
+				}*/
+		return null;
 	}
+		
 	@Override
 	public ArrayList<CMCommande> findAll() throws Exception {
 		return (ArrayList<CMCommande>) this.donnees;

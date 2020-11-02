@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -28,8 +29,8 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </TableView>
-      <Button fx:id="btn_supr" layoutX="665.0" layoutY="600.0" mnemonicParsing="false" onAction="#suppr" prefHeight="31.0" prefWidth="112.0" text="Supprimer" />
-      <AnchorPane fx:id="anchprod" prefHeight="728.0" prefWidth="440.0">
+      <Button fx:id="btn_supr" layoutX="657.0" layoutY="603.0" mnemonicParsing="false" onAction="#suppr" prefHeight="31.0" prefWidth="112.0" text="Supprimer" />
+      <AnchorPane fx:id="anchprod" prefHeight="725.0" prefWidth="440.0">
          <children>
             <Label layoutX="15.0" layoutY="177.0" text="Nom :">
                <font>
@@ -68,9 +69,24 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></AnchorPane>
-      <Button fx:id="btnhome" ellipsisString="" layoutX="861.0" layoutY="25.0" mnemonicParsing="false" onAction="#swapaccueil" prefHeight="125.0" prefWidth="126.0">
+      <Button fx:id="btnhome" ellipsisString="" layoutX="896.0" mnemonicParsing="false" onAction="#swapaccueil" prefHeight="100.0" prefWidth="100.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
+      <ImageView disable="true" fitHeight="100.0" fitWidth="100.0" layoutX="896.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/acceuiil.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblinfo" layoutX="455.0" layoutY="559.0" prefHeight="44.0" prefWidth="263.0">
+         <font>
+            <Font name="Arial Black" size="18.0" />
+         </font></Label>
+      <ChoiceBox fx:id="ChoiceB1" layoutX="548.0" layoutY="133.0" onAction="#tri" prefWidth="150.0" />
+      <CheckBox fx:id="check" layoutX="455.0" layoutY="132.0" mnemonicParsing="false" onAction="#triage" text="Trier">
+         <font>
+            <Font name="Arial Black" size="18.0" />
+         </font>
+      </CheckBox>
    </children>
 </AnchorPane>

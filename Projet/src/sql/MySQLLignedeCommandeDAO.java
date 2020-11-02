@@ -112,14 +112,14 @@ public CMLignedeCommande getById(int id_commande) throws SQLException {
 	public boolean delete(CMLignedeCommande ldc) {
 		int nbLignes=0;
     	try {
-    	Connexion.getInstance();
+    	//Connexion.getInstance();
 		Connection laConnexion = Connexion.getInstance().getcon();
-	PreparedStatement requete = laConnexion.prepareStatement("delete * from Ligne_commande where id_commande=?");
+	PreparedStatement requete = laConnexion.prepareStatement("delete  from Ligne_commande where id_commande=? AND id_produit=?");
 	
 	requete.setInt(1,ldc.getId_commande());
+	requete.setInt(2, ldc.getId_produit());
 	nbLignes = requete.executeUpdate();
     	} catch(SQLException sqle) {
-    		System.out.println("Pb delete ligne de commande"+sqle.getMessage());
     	}
 
 	return nbLignes==1;

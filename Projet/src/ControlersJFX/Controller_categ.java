@@ -14,14 +14,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
 import metier.CMCategorie;
 import metier.CMProduit;
 import sql.Connexion;
@@ -45,9 +51,24 @@ public class Controller_categ implements Initializable,ChangeListener<CMCategori
     private Button btn_add;
     @FXML
     private Button btn_suppr;
+    @FXML
+    private Menu Macceuil;
+
+    @FXML
+    private Menu Mclient;
+
+    @FXML
+    private Menu MCommande;
+
+    @FXML
+    private Menu Mproduit;
+
+    @FXML
+    private Menu Mcatégorie;
+
 	@Override
-	
 	public void initialize(URL arg0, ResourceBundle arg1) {
+
 		table.setEditable(true);
 		col_titre.setCellFactory(TextFieldTableCell.forTableColumn());
 		col_visuel.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -144,13 +165,30 @@ public class Controller_categ implements Initializable,ChangeListener<CMCategori
 			table.getItems().addAll(list.get(i));
 			i++;
 		}
-		System.out.println(list);
 		
 	}
 	@Override
 	public void changed(ObservableValue<? extends CMCategorie> arg0, CMCategorie arg1, CMCategorie arg2) {
 		btn_suppr.setDisable(false);		
 	}
-    
+	public void swapaccueil(ActionEvent event){
+		Parent tablViewParent;
+		tablViewParent=null;
+		try {
+			tablViewParent = FXMLLoader.load(getClass().getResource("/FXML/accueil.fxml"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Scene tablViewsScene = new Scene(tablViewParent);
+		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+		window.setScene(tablViewsScene);
+		window.setHeight(530);
+		window.centerOnScreen();
+		window.show();
+	}
+
+
+	
     
 }

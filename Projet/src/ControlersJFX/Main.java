@@ -13,7 +13,6 @@ public class Main extends Application {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("/FXML/accueil.fxml"));
 			Scene scene = new Scene(root);
-			System.out.println(Stage.isResizable());
 			Stage.setResizable(false);
 			Stage.setTitle("ACCEUIL");
 			Stage.setScene(scene);

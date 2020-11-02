@@ -42,10 +42,16 @@
 		-fx-base: rgb(237, 109, 111);
 		-fx-background-color: rgb(200,200,200);
 	}
+	
+	#comform{
+		-fx-base: rgb(12, 156, 34);
+		-fx-background-color: rgb(100,100,100);
+	}
+	#comback{
+		-fx-base: rgb(113, 235, 131);
+		-fx-background-color: rgb(200,200,200);}
 	#btnhome{
 		-fx-background-radius: 7em;
-		-fx-background-image: url('/images/home.png');
-    	-fx-background-repeat: no-repeat;
     	-fx-border-color: transparent;
     	-fx-border-width: 0;
     	-fx-background-radius: 0;

@@ -15,45 +15,48 @@ import javafx.stage.Stage;
 public class Controller_accueil implements Initializable {
 
 	public void swapproduit(ActionEvent event) throws Exception{
-		System.out.println("yo");
 		Parent tablViewParent = FXMLLoader.load(getClass().getResource("/FXML/produit.fxml"));
 		Scene tablViewsScene = new Scene(tablViewParent);
 		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 		window.setScene(tablViewsScene);
 		window.setTitle("Produit");
+		window.setHeight(750);
+		window.centerOnScreen();
 		window.show();
 		
 	}
 
 	public void swapcateg(ActionEvent event) throws Exception{
-		System.out.println("yo");
 		Parent tablViewParent = FXMLLoader.load(getClass().getResource("/FXML/categ.fxml"));
 		Scene tablViewsScene = new Scene(tablViewParent);
 		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 		window.setScene(tablViewsScene);
 		window.setTitle("Catégorie");
+		window.setHeight(750);
+		window.centerOnScreen();
 		window.show();
 	}
 	
 	public void swapclient(ActionEvent event) throws Exception{
-		System.out.println("yo");
 		Parent tablViewParent2 = FXMLLoader.load(getClass().getResource("/FXML/client.fxml"));
 		Scene tablViewsScene = new Scene(tablViewParent2);
 		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 		window.setScene(tablViewsScene);
 		window.setTitle("Client");
+		window.setHeight(750);
 		window.centerOnScreen();
 		window.show();
 	
 	}
 	
 	public void swapcommande(ActionEvent event) throws Exception{
-		System.out.println("yo");
 		Parent tablViewParent = FXMLLoader.load(getClass().getResource("/FXML/commande.fxml"));
 		Scene tablViewsScene = new Scene(tablViewParent);
 		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 		window.setScene(tablViewsScene);
 		window.setTitle("Commande");
+		window.setHeight(585);
+		window.centerOnScreen();
 		window.show();
 	}
 	@Override
@@ -61,4 +64,5 @@ public class Controller_accueil implements Initializable {
 		// TODO Auto-generated method stub
 		
 	}
+	
 }

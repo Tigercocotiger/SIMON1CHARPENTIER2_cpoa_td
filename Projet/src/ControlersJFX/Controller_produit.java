@@ -2,6 +2,7 @@ package ControlersJFX;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -20,7 +21,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
@@ -32,8 +36,8 @@ import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.util.converter.FloatStringConverter;
 import javafx.util.converter.IntegerStringConverter;
-import javafx.util.converter.NumberStringConverter;
 import metier.CMCategorie;
+import metier.CMLignedeCommande;
 import metier.CMProduit;
 import sql.Connexion;
 
@@ -63,20 +67,34 @@ public class Controller_produit implements Initializable,ChangeListener<CMProdui
 	public ChoiceBox<CMCategorie> ChoiceB;
     @FXML
     private TextArea Tfdesc;
-
     @FXML
     private TextField Tfnom;
-
     @FXML
     private TextField Tftarif;
-
     @FXML
     private TextField Tfvisuel;
+    @FXML
+    private Menu Macceuil;
+    @FXML
+    private Menu Mclient;
+    @FXML
+    private Menu MCommande;
+    @FXML
+    private Menu Mproduit;
+    @FXML
+    private Menu Mcatégorie;
+    @FXML
+    private Label lblinfo;
+    @FXML
+    private ChoiceBox<CMCategorie> ChoiceB1;
+    @FXML
+    private CheckBox check;
 	
 
 	
 @Override
 public void initialize(URL arg0, ResourceBundle arg1) {
+	ChoiceB1.setDisable(true);
 	btn_add.setDisable(true);
 	table.setEditable(true);
 	col_idproduit.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
@@ -104,25 +122,26 @@ public void initialize(URL arg0, ResourceBundle arg1) {
 		e.printStackTrace();
 	}
 	
+	ChoiceB1.setConverter(new StringConverter<CMCategorie>() {
+        @Override
+        public CMCategorie fromString(String nom) {
+            return ChoiceB1.getItems().stream().filter(categ -> categ.getTitre().equals(nom)).findFirst().orElse(null);
+        }
 
-}
-public void swapaccueil(ActionEvent event){
-	System.out.println("yo");
-	Parent tablViewParent;
-	tablViewParent=null;
+        @Override
+        public String toString(CMCategorie objet) {
+            return objet.getTitre();
+        }
+    });
 	try {
-		tablViewParent = FXMLLoader.load(getClass().getResource("/FXML/accueil.fxml"));
-	} catch (IOException e) {
+		ChoiceB1.getItems().addAll(DAOFactory.getDAOFactory(Persistance.MYSQL).getCategorieDAO().findAll());
+	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	Scene tablViewsScene = new Scene(tablViewParent);
-	Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-	window.setScene(tablViewsScene);
-	window.show();
+	
+
 }
-
-
 
 public void modifid(CellEditEvent<?,?> edittedCell)
 {
@@ -200,7 +219,7 @@ public void add(ActionEvent event) throws IOException {
     String Lblvisuel = Tfvisuel.getText().trim();
 	int value = ChoiceB.getSelectionModel().getSelectedItem().getId();  
 	float f=Float.parseFloat(LblTarif);  
-	System.out.println(value);
+
 	try {
 		CMProduit Prod = new CMProduit(Lblnom,LblDesc,f,Lblvisuel,value);
 		daos.getProduitDAO().create(Prod);
@@ -220,7 +239,6 @@ public void add(ActionEvent event) throws IOException {
 public void suppr(){
 	btn_supr.setDisable(true);
 	CMProduit selectedItem = table.getSelectionModel().getSelectedItem();
-	System.out.println(selectedItem.getNom());
 	try {
 		daos.getProduitDAO().delete(new CMProduit(selectedItem.getId_produit()));
 		table.getItems().remove(selectedItem);
@@ -229,6 +247,44 @@ public void suppr(){
 	}
 	}
 
+public void tri() {
+	CMCategorie selectedItem = ChoiceB1.getSelectionModel().getSelectedItem();
+	tabtri(selectedItem.getId());
+}
+public void tabtri(int id_cat) {
+	ObservableList<CMProduit> list2=  FXCollections.observableArrayList();
+	table.getItems().clear();
+	try {
+		PreparedStatement statement =cnx.prepareStatement("Select * from Produit where id_categorie=?");
+		statement.setInt(1,id_cat);
+		ResultSet res= statement.executeQuery();
+		while (res.next()) {
+			list2.add(new CMProduit(res.getInt("id_produit"),res.getString("nom"),res.getString("description"),res.getFloat("tarif"),res.getString("visuel"),res.getInt("id_categorie")));
+		}
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	col_idproduit.setCellValueFactory(new  PropertyValueFactory<CMProduit,Integer>("id_produit"));
+	col_nom.setCellValueFactory(new  PropertyValueFactory<CMProduit,String>("nom"));
+	col_desc.setCellValueFactory(new  PropertyValueFactory<CMProduit,String>("description"));
+	col_tarif.setCellValueFactory(new  PropertyValueFactory<CMProduit,Float>("tarif"));
+	col_visuel.setCellValueFactory(new  PropertyValueFactory<CMProduit,String>("visuel"));
+	col_idcateg.setCellValueFactory(new  PropertyValueFactory<CMProduit,Integer>("id_categorie"));
+	table.getItems().addAll(list2);
+
+	
+}
+public void triage(ActionEvent event) throws IOException{
+	if (check.isSelected()){
+		ChoiceB1.setDisable(false);
+	}
+	else {
+		ChoiceB1.setDisable(true);
+		tabview();
+		}
+	
+}
 public void test() {
 	String LblDesc = Tfdesc.getText().trim();
     String Lblnom = Tfnom.getText().trim();
@@ -270,13 +326,50 @@ public void tabview() {
 		table.getItems().addAll(list.get(i));
 		i++;
 	}
-	System.out.println(list);
+
 	
 }
 
 @Override
 public void changed(ObservableValue<? extends CMProduit> arg0, CMProduit arg1, CMProduit arg2) {
+	double prix=0;
 	btn_supr.setDisable(false);
+	CMProduit selectedItem = table.getSelectionModel().getSelectedItem();
+	try {
+		PreparedStatement statement =cnx.prepareStatement("Select * from Ligne_commande where id_produit=?");
+		statement.setInt(1,selectedItem.getId_produit());
+		ResultSet res= statement.executeQuery();
+		while (res.next()) {
+			CMLignedeCommande sql =new CMLignedeCommande(res.getInt(1),res.getInt(2),res.getInt(3),res.getDouble(4));
+			prix = prix + sql.getQuantite()*sql.getTarif_unitaire();
+			
+					}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	lblinfo.setText("Total des ventes = " +prix);
+	
 	
 }
+
+public void swapaccueil(ActionEvent event){
+
+	Parent tablViewParent;
+	tablViewParent=null;
+	try {
+		tablViewParent = FXMLLoader.load(getClass().getResource("/FXML/accueil.fxml"));
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	Scene tablViewsScene = new Scene(tablViewParent);
+	Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+	window.setScene(tablViewsScene);
+	window.centerOnScreen();
+	window.setHeight(500);
+	window.show();
+}
+
+
+
 }

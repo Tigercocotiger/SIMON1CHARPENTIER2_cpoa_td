@@ -3,6 +3,8 @@ package sql;
 
 import java.sql.*;
 import java.util.ArrayList;
+
+import metier.CMCommande;
 import metier.CMProduit;
 import dao.ProduitDAO;
 
@@ -142,9 +144,26 @@ public CMProduit getById(int id_produit) throws SQLException {
 
 	@Override
 	public ArrayList<CMProduit> findAll() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		ArrayList<CMProduit> c = new ArrayList<CMProduit>();
+			
+			
+			Connection con = Connexion.getInstance().getcon();
+			PreparedStatement req = con.prepareStatement("select * from Produit ");
+			
+			
+			
+			ResultSet res = req.executeQuery();
+			
+			while (res.next()) {
+				c.add(new CMProduit(res.getInt(1),res.getString(2),res.getString(3),res.getFloat(4),res.getString(5),res.getInt(6)));
+				
+			}
+			
+
+			req.close();
+			res.close();
+			return c;
+		}
 	
 
 }

@@ -3,6 +3,7 @@ package ControlersJFX;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -17,8 +18,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Menu;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -27,6 +34,7 @@ import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import metier.CMClient;
 import metier.CMProduit;
 import sql.Connexion;
@@ -100,8 +108,63 @@ public class Controller_client implements Initializable,ChangeListener<CMClient>
     private Button btn_add;
     @FXML
     private Button btn_suppr;
+    @FXML
+    private Menu Macceuil;
+
+    @FXML
+    private Menu Mclient;
+
+    @FXML
+    private Menu MCommande;
+
+    @FXML
+    private Menu Mproduit;
+
+    @FXML
+    private Menu Mcatégorie;
+    @FXML
+    private CheckBox check1;
+
+    @FXML
+    private TextField lbl_tri;
     
     
+   
+    public void tri() {
+    	if(!lbl_tri.getText().trim().isEmpty())
+    	tabtri(lbl_tri.getText().trim());
+    }
+	
+	public void triage(ActionEvent event) throws IOException {
+		if (check1.isSelected()){
+			lbl_tri.setDisable(false);
+
+		}
+		else {
+			lbl_tri.setDisable(true);
+			tabview();
+			}
+		
+	}
+	
+	public void tabtri(String nom) {
+		ObservableList<CMClient> list2=  FXCollections.observableArrayList();
+		table.getItems().clear();
+		try {
+			PreparedStatement statement =cnx.prepareStatement("Select * from Client where nom=?");
+			statement.setString(1,nom);
+			ResultSet res= statement.executeQuery();
+			while (res.next()) {
+				list2.add(new CMClient(res.getInt("id_client"),res.getString("nom"),res.getString("prenom"),res.getString("identifiant"),res.getString("mot_de_passe"),res.getString("adr_numero"),res.getString("adr_voie"),res.getString("adr_code_postal"),res.getString("adr_ville"),res.getString("adr_pays")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		table.getItems().addAll(list2);
+
+		
+	}
 	public void tabview() {
 		int i =0,j=0;
 		ObservableList<CMClient> list=  FXCollections.observableArrayList();
@@ -133,7 +196,6 @@ public class Controller_client implements Initializable,ChangeListener<CMClient>
 			table.getItems().addAll(list.get(i));
 			i++;
 		}
-		System.out.println(list);
 		
 	}
 	public void add(ActionEvent event) throws IOException {
@@ -151,7 +213,6 @@ public class Controller_client implements Initializable,ChangeListener<CMClient>
 			CMClient client = new CMClient(nom,prenom,identifiant,mdp,numero,rue,codepost,ville,pays);
 			daos.getClientDAO().create(client);
 			table.getItems().add(client);
-			System.out.println(client.getId_client());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -324,5 +385,24 @@ public class Controller_client implements Initializable,ChangeListener<CMClient>
 		btn_suppr.setDisable(false);
 		
 	}
+	public void swapaccueil(ActionEvent event){
+		Parent tablViewParent;
+		tablViewParent=null;
+		try {
+			tablViewParent = FXMLLoader.load(getClass().getResource("/FXML/accueil.fxml"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Scene tablViewsScene = new Scene(tablViewParent);
+		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+		window.setScene(tablViewsScene);
+		window.setHeight(500);
+		window.centerOnScreen();
+		window.show();
+	}
+
+
+	
 
 }
